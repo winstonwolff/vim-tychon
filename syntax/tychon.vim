@@ -8,26 +8,46 @@ endif
 " Highlight long strings.
 syntax sync fromstart
 
-" The first case matches symbol operators only if they have an operand before.
-syn match coffeeExtendedOp /\%(\S\s*\)\@<=[+\-*/%&|\^=!<>?.]\{-1,}\|[-=]>\|--\|++\|:/
-\                          display
-syn match coffeeExtendedOp /\<\%(and\|or\)=/ display
-hi def link coffeeExtendedOp coffeeOperator
+syn region tychonString start=/"/ skip=/\\\\\|\\"/ end=/"/
+syn region tychonString start=/'/ skip=/\\\\\|\\'/ end=/'/
+hi def link tychonString String
 
-syn match coffeeBoolean /\<\%(True\|False\)\>/ display
-hi def link coffeeBoolean Boolean
+" The first case matches symbol operators only if they have an operand before.
+" syn match tychonExtendedOp /\%(\S\s*\)\@<=[+\-*/%&|\^=!<>?.]\{-1,}\|[-=]>\|--\|++\|:/
+" \                          display
+" syn match tychonExtendedOp /\<\%(and\|or\)=/ display
+" hi def link tychonExtendedOp tychonOperator
+
+" A integer, including a leading plus or minus
+syn match tychonNumber /\%(\i\|\$\)\@<![-+]\?\d\+\%(e[+-]\?\d\+\)\?/ display
+hi def link tychonNumber Number
+
+" A floating-point number, including a leading plus or minus
+syn match tychonFloat /\%(\i\|\$\)\@<![-+]\?\d*\.\@<!\.\d\+\%([eE][+-]\?\d\+\)\?/
+\                     display
+hi def link tychonFloat Float
+
+syn match tychonComment /#.*/
+hi def link tychonComment Comment
+
+syn match tychonKeyword /\<\%(func\|import\|export\|print\)\>/
+\                       display
+hi def link tychonKeyword Keyword
 
 " A class-like name that starts with a capital letter
-syn match coffeeObject /\<\u\w*\>/ display
-hi def link coffeeObject Structure
+syn match tychonObject /\<\u\w*\>/ display
+hi def link tychonObject Structure
 
 " A constant-like name in SCREAMING_CAPS
-syn match coffeeConstant /\<\u[A-Z0-9_]\+\>/ display
-hi def link coffeeConstant Constant
+syn match tychonConstant /\<\u[A-Z0-9_]\+\>/ display
+hi def link tychonConstant Constant
+
+syn match tychonBoolean /\<\%(True\|False\)\>/ display
+hi def link tychonBoolean Boolean
 
 " An error for trailing whitespace, as long as the line isn't just whitespace
-syn match coffeeSpaceError /\S\@<=\s\+$/ display
-hi def link coffeeSpaceError Error
+syn match tychonSpaceError /\S\@<=\s\+$/ display
+hi def link tychonSpaceError Error
 
 if !exists('b:current_syntax')
   let b:current_syntax = 'tychon'
