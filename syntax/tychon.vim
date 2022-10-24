@@ -30,7 +30,7 @@ hi def link tychonFloat Float
 syn match tychonComment /#.*/
 hi def link tychonComment Comment
 
-syn match tychonKeyword /\<\%(func\|import\|export\|print\)\>/
+syn match tychonKeyword /\<\%(__scope__\|func\|import\|export\|print\)\>/
 \                       display
 hi def link tychonKeyword Keyword
 
@@ -42,8 +42,8 @@ hi def link tychonObject Structure
 syn match tychonConstant /\<\u[A-Z0-9_]\+\>/ display
 hi def link tychonConstant Constant
 
-syn match tychonBoolean /\<\%(True\|False\)\>/ display
-hi def link tychonBoolean Boolean
+" syn match tychonBoolean /\<\%(True\|False\)\>/ display
+" hi def link tychonBoolean Boolean
 
 " An error for trailing whitespace, as long as the line isn't just whitespace
 syn match tychonSpaceError /\S\@<=\s\+$/ display
