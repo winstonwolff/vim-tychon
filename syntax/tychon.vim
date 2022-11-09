@@ -30,9 +30,14 @@ hi def link tychonFloat Float
 syn match tychonComment /#.*/
 hi def link tychonComment Comment
 
-syn match tychonKeyword /\<\%(__scope__\|func\|import\|export\|print\)\>/
-\                       display
-hi def link tychonKeyword Keyword
+syntax keyword tychonKeywords
+            \ __scope__
+            \ export
+            \ func
+            \ import
+            \ macro
+            \ print
+highlight default link tychonKeywords Keyword
 
 " A class-like name that starts with a capital letter
 syn match tychonObject /\<\u\w*\>/ display
@@ -48,6 +53,11 @@ hi def link tychonConstant Constant
 " An error for trailing whitespace, as long as the line isn't just whitespace
 syn match tychonSpaceError /\S\@<=\s\+$/ display
 hi def link tychonSpaceError Error
+
+syntax match tychonFunction /\<\h\w*\>(/ display
+hi def link tychonFunction Function
+syntax match tychonColonFunction /\<\h\w*\>::/ display
+hi def link tychonColonFunction Function
 
 if !exists('b:current_syntax')
   let b:current_syntax = 'tychon'
